@@ -4,7 +4,7 @@ import {
   randomlyPlacePieces,
   moveBlackBishop,
   generateCellAdress,
-} from './main';
+} from './functions';
 import store from './store/store';
 import { cleanUpHistory, addToHistory } from './actions/historyManipulations';
 import './App.css';
