@@ -1,0 +1,61 @@
+h4 {
+  margin: 0;
+  font-weight: 500;
+}
+
+.Board {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 400;
+  font-size: 24px;
+  color: '#37474F';
+
+  background-color: rgb(245, 245, 245);
+  border-radius: 16px;
+
+  box-shadow: 0 3.7px 3.6px -15px rgba(0, 0, 0, 0.028),
+    0 8.2px 9.1px -15px rgba(0, 0, 0, 0.04),
+    0 14.9px 18.6px -15px rgba(0, 0, 0, 0.05),
+    0 28.8px 38.3px -15px rgba(0, 0, 0, 0.062),
+    0 60px 105px -15px rgba(0, 0, 0, 0.09);
+
+  width: 450px;
+  height: 450px;
+
+  display: grid;
+
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+}
+
+.Squares {
+  grid-row: 2 / 10;
+  grid-column: 2 / 10;
+
+  background-image: url(./assets/squares.svg);
+  background-size: cover;
+
+  border-radius: 8px;
+
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  align-items: center;
+  justify-items: center;
+
+  transition: all 1s;
+}
+
+.OnBoard {
+  display: block;
+}
+
+.NotOnBoard {
+  display: none;
+}
+
+@media screen and (max-width: 500px) {
+  .Board {
+    width: 90vw;
+    height: 90vw;
+  }
+}
