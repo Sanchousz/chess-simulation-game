@@ -9,20 +9,8 @@ import store from './store/store';
 import { cleanUpHistory, addToHistory } from './actions/historyManipulations';
 import './App.css';
 
-const getBlackPiecesPositions = () => {
-  const pieces = [
-    store.getState().blackQueenPosition,
-    store.getState().blackKnightPosition,
-    store.getState().blackBishopPosition,
-  ];
-  return pieces.filter((piece) => piece.isOnBoard);
-};
-
 const Controls = () => {
   const [isPaused, setIsPaused] = useState(true);
-  const [blackPiecesPositions, setBlackPiecesPositions] = useState(
-    getBlackPiecesPositions
-  );
 
   let i = 0;
 
@@ -51,7 +39,6 @@ const Controls = () => {
     setIsPaused(true);
     randomlyPlacePieces();
     store.dispatch(cleanUpHistory());
-    setBlackPiecesPositions(getBlackPiecesPositions);
   };
 
   return (
