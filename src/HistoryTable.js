@@ -42,11 +42,7 @@ const HistoryTable = () => {
   return (
     <Grid container justify='center'>
       <Grid item xs={11} sm={8} md={6} lg={3} xl={3}>
-        <TableContainer
-          className='table-container'
-          elevation={4}
-          component={Paper}
-        >
+        <TableContainer elevation={4} component={Paper}>
           <Table>
             <TableHead>
               <TableRow>
@@ -55,7 +51,7 @@ const HistoryTable = () => {
                 <StyledTableCell align='center'>To</StyledTableCell>
               </TableRow>
             </TableHead>
-            <TableBody>
+            <TableBody className='table-body'>
               {moves.length > 0 ? (
                 moves.map((move) => (
                   <StyledTableRow key={move.id}>
