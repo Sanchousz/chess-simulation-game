@@ -14,6 +14,7 @@ import {
   takeBlackBishop,
 } from './actions/moves';
 import { addToHistory } from './actions/historyManipulations';
+import { findBestQueenMove } from './movesLogic';
 
 const generateRandomPosition = () => {
   let row = Math.round(Math.random() * 7 + 1);
@@ -25,16 +26,6 @@ const generateRandomPosition = () => {
     column,
   };
 };
-
-// const isInBoardLimits = (position) =>
-//   position.row >= 1 &&
-//   position.row <= 8 &&
-//   position.column >= 1 &&
-//   position.column <= 8;
-
-// // const isAValidMove = (position, teammatesPositions) => {
-// //   if (!isInBoardLimits(position)) console.log('a');
-// // };
 
 const generateCellAdress = (position) => {
   const { row, column } = position;
@@ -92,12 +83,20 @@ const takeAPiece = (position, color) => {
         JSON.stringify(position)
       ) {
         store.dispatch(takeWhiteQueen());
+        console.log(
+          JSON.stringify(store.getState().whiteQueenPosition),
+          JSON.stringify(position)
+        );
         return true;
       } else if (
         JSON.stringify(store.getState().whiteKnightPosition) ===
         JSON.stringify(position)
       ) {
         store.dispatch(takeWhiteKnight());
+        console.log(
+          JSON.stringify(store.getState().whiteKnightPosition),
+          JSON.stringify(position)
+        );
         return true;
       } else if (
         JSON.stringify(store.getState().whiteBishopPosition) ===
@@ -112,19 +111,19 @@ const takeAPiece = (position, color) => {
         JSON.stringify(store.getState().blackQueenPosition) ===
         JSON.stringify(position)
       ) {
-        takeBlackQueen();
+        store.dispatch(takeBlackQueen());
         return true;
       } else if (
         JSON.stringify(store.getState().blackKnightPosition) ===
         JSON.stringify(position)
       ) {
-        takeBlackKnight();
+        store.dispatch(takeBlackKnight());
         return true;
       } else if (
         JSON.stringify(store.getState().blackBishopPosition) ===
         JSON.stringify(position)
       ) {
-        takeBlackBishop();
+        store.dispatch(takeBlackBishop());
         return true;
       }
       break;
@@ -134,7 +133,7 @@ const takeAPiece = (position, color) => {
 };
 
 const movePieces = (id, whitesPositions, blacksPositions) => {
-  moveQueen(
+  moveBlackQueen(
     id,
     store.getState().blackQueenPosition,
     blacksPositions,
@@ -142,16 +141,26 @@ const movePieces = (id, whitesPositions, blacksPositions) => {
   );
 };
 
-const moveQueen = (
+const isAGoodMove = (newPosition, teammatesPositions, opponentsPosition) => {
+  if (isOccupied(teammatesPositions, newPosition)) return -1;
+  else if (isOccupied(opponentsPosition, newPosition)) {
+    return true;
+  }
+  return false;
+};
+
+const moveBlackQueen = (
   moveId,
   oldPosition,
   teammatesPositions,
   opponentsPosition
 ) => {
-  let newPosition = findFreePosition(teammatesPositions.concat(oldPosition));
-  if (isOccupied(opponentsPosition, newPosition)) {
-    takeAPiece(newPosition, 'white');
-  }
+  let newPosition = findBestQueenMove(
+    oldPosition,
+    teammatesPositions,
+    opponentsPosition
+  );
+
   store.dispatch(changeBlackQueenPosition(newPosition));
   store.dispatch(
     addToHistory(
@@ -163,4 +172,10 @@ const moveQueen = (
   );
 };
 
-export { randomlyPlacePieces, movePieces };
+export {
+  randomlyPlacePieces,
+  movePieces,
+  isAGoodMove,
+  takeAPiece,
+  findFreePosition,
+};

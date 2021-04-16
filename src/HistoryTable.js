@@ -42,7 +42,11 @@ const HistoryTable = () => {
   return (
     <Grid container justify='center'>
       <Grid item xs={11} sm={8} md={6} lg={3} xl={3}>
-        <TableContainer elevation={4} component={Paper}>
+        <TableContainer
+          className='table-container'
+          elevation={4}
+          component={Paper}
+        >
           <Table>
             <TableHead>
               <TableRow>

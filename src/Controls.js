@@ -44,7 +44,6 @@ const Controls = () => {
       setMovesCounter(movesCounter + 1);
       movePieces(movesCounter, whitesPositions, blacksPositions);
     }
-    console.log(canContinueGame());
   }, delay);
 
   const simulateGame = () => {

@@ -21,3 +21,7 @@
   width: 100%;
   margin-top: 1rem !important;
 }
+
+.table-container {
+  max-height: 500px;
+}
