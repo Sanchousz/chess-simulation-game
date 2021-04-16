@@ -1,41 +1,51 @@
 import { useState, useRef, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { Grid, Button } from '@material-ui/core';
-import {
-  randomlyPlacePieces,
-  moveBlackBishop,
-  generateCellAdress,
-} from './functions';
-import store from './store/store';
-import { cleanUpHistory, addToHistory } from './actions/historyManipulations';
+import { randomlyPlacePieces, movePieces } from './functions';
+import { cleanUpHistory } from './actions/historyManipulations';
 import './App.css';
+import store from './store/store';
 
 const Controls = () => {
+  const [movesCounter, setMovesCounter] = useState(0);
   const [isPaused, setIsPaused] = useState(true);
-
-  let i = 0;
+  const [isStoped, setIsStoped] = useState(false);
 
   const playGame = () => setIsPaused(false);
   const pauseGame = () => setIsPaused(true);
 
+  const whitesPositions = useSelector((state) => [
+    state.whiteQueenPosition,
+    state.whiteKnightPosition,
+    state.whiteBishopPosition,
+  ]);
+
+  const blacksPositions = useSelector((state) => [
+    state.blackQueenPosition,
+    state.blackKnightPosition,
+    state.blackBishopPosition,
+  ]);
+
+  const canContinueGame = () =>
+    blacksPositions.filter((element) => element.isOnBoard) &&
+    whitesPositions.filter((element) => element.isOnBoard);
+
+  // useRef(() => {
+  //   console.log(canContinueGame);
+  // });
+
   useInterval(() => {
-    if (!isPaused) {
-      i++;
-      const oldPosition = store.getState().blackBishopPosition;
-      moveBlackBishop();
-      const newPosition = store.getState().blackBishopPosition;
-      store.dispatch(
-        addToHistory(
-          i,
-          'Black Bishop',
-          generateCellAdress(oldPosition),
-          generateCellAdress(newPosition)
-        )
-      );
+    canContinueGame().length !== 0 ? setIsStoped(false) : setIsStoped(true);
+    if (!isPaused && !isStoped) {
+      setMovesCounter(movesCounter + 1);
+      movePieces(movesCounter, whitesPositions, blacksPositions);
     }
-  }, 1500);
+    console.log(canContinueGame());
+  }, 400);
 
   const simulateGame = () => {
-    i = 0;
+    setIsStoped(false);
+    setMovesCounter(0);
     setIsPaused(true);
     randomlyPlacePieces();
     store.dispatch(cleanUpHistory());

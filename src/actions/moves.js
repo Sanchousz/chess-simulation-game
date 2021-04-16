@@ -47,6 +47,37 @@ const changeBlackKnightPosition = (position) => {
     column: position.column,
   };
 };
+const takeWhiteQueen = () => {
+  return {
+    type: 'TAKE_WHITE_QUEEN',
+  };
+};
+const takeWhiteKnight = () => {
+  return {
+    type: 'TAKE_WHITE_KNIGHT',
+  };
+};
+const takeWhiteBishop = () => {
+  return {
+    type: 'TAKE_WHITE_BISHOP',
+  };
+};
+
+const takeBlackQueen = () => {
+  return {
+    type: 'TAKE_BLACK_QUEEN',
+  };
+};
+const takeBlackBishop = () => {
+  return {
+    type: 'TAKE_BLACK_BISHOP',
+  };
+};
+const takeBlackKnight = () => {
+  return {
+    type: 'TAKE_BLACK_KNIGHT',
+  };
+};
 
 export {
   changeWhiteQueenPosition,
@@ -55,4 +86,10 @@ export {
   changeBlackQueenPosition,
   changeBlackKnightPosition,
   changeBlackBishopPosition,
+  takeWhiteQueen,
+  takeWhiteKnight,
+  takeWhiteBishop,
+  takeBlackQueen,
+  takeBlackKnight,
+  takeBlackBishop,
 };

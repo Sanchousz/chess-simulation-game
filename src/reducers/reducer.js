@@ -69,6 +69,48 @@ const piecesPositionReducer = (state, action) => {
           column: action.column,
         },
       };
+    case 'TAKE_WHITE_QUEEN':
+      return {
+        ...state,
+        whiteQueenPosition: {
+          isOnBoard: false,
+        },
+      };
+    case 'TAKE_WHITE_KNIGHT':
+      return {
+        ...state,
+        whiteKnightPosition: {
+          isOnBoard: false,
+        },
+      };
+    case 'TAKE_WHITE_BISHOP':
+      return {
+        ...state,
+        whiteBishopPosition: {
+          isOnBoard: false,
+        },
+      };
+    case 'TAKE_BLACK_QUEEN':
+      return {
+        ...state,
+        blackQueenPosition: {
+          isOnBoard: false,
+        },
+      };
+    case 'TAKE_BLACK_KNIGHT':
+      return {
+        ...state,
+        blackKnightPosition: {
+          isOnBoard: false,
+        },
+      };
+    case 'TAKE_BLACK_BISHOP':
+      return {
+        ...state,
+        blackBishopPosition: {
+          isOnBoard: false,
+        },
+      };
     default:
       return state;
   }
