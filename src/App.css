@@ -22,6 +22,6 @@
   margin-top: 1rem !important;
 }
 
-.table-body {
-  max-height: 400px;
+.table-container {
+  max-height: 500px;
 }
