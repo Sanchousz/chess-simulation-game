@@ -1,12 +1,13 @@
 import { useState, useRef, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { Grid, Button } from '@material-ui/core';
+import { Grid, Button, TextField } from '@material-ui/core';
 import { randomlyPlacePieces, movePieces } from './functions';
 import { cleanUpHistory } from './actions/historyManipulations';
 import './App.css';
 import store from './store/store';
 
 const Controls = () => {
+  const [delay, setDelay] = useState(1000);
   const [movesCounter, setMovesCounter] = useState(0);
   const [isPaused, setIsPaused] = useState(true);
   const [isStoped, setIsStoped] = useState(false);
@@ -30,9 +31,12 @@ const Controls = () => {
     blacksPositions.filter((element) => element.isOnBoard) &&
     whitesPositions.filter((element) => element.isOnBoard);
 
-  // useRef(() => {
-  //   console.log(canContinueGame);
-  // });
+  const handleDelayChange = (e) => {
+    const value = e.target.value;
+    value > 0
+      ? setDelay(e.target.value)
+      : alert('Please, write a value bigger than 0');
+  };
 
   useInterval(() => {
     canContinueGame().length !== 0 ? setIsStoped(false) : setIsStoped(true);
@@ -41,7 +45,7 @@ const Controls = () => {
       movePieces(movesCounter, whitesPositions, blacksPositions);
     }
     console.log(canContinueGame());
-  }, 400);
+  }, delay);
 
   const simulateGame = () => {
     setIsStoped(false);
@@ -77,6 +81,14 @@ const Controls = () => {
         >
           New Simulation
         </Button>
+        <TextField
+          id='filled-number'
+          label='Delay for a move (milisenconds)'
+          type='number'
+          value={delay}
+          onChange={handleDelayChange}
+          className='delayInput'
+        />
       </Grid>
     </Grid>
   );
