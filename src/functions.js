@@ -108,13 +108,22 @@ const takeAPiece = (position, color) => {
       }
       break;
     case 'black':
-      if (store.getState().blackQueenPosition === position) {
+      if (
+        JSON.stringify(store.getState().blackQueenPosition) ===
+        JSON.stringify(position)
+      ) {
         takeBlackQueen();
         return true;
-      } else if (store.getState().whiteKnightPosition === position) {
+      } else if (
+        JSON.stringify(store.getState().blackKnightPosition) ===
+        JSON.stringify(position)
+      ) {
         takeBlackKnight();
         return true;
-      } else if (store.getState().whiteBishopPosition === position) {
+      } else if (
+        JSON.stringify(store.getState().blackBishopPosition) ===
+        JSON.stringify(position)
+      ) {
         takeBlackBishop();
         return true;
       }
