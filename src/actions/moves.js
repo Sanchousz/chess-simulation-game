@@ -8,7 +8,7 @@ const changeWhiteQueenPosition = (position) => {
 };
 const changeWhiteKnightPosition = (position) => {
   return {
-    type: 'MOVE_WHITE_BISHOP',
+    type: 'MOVE_WHITE_KNIGHT',
     isOnBoard: position.isOnBoard,
     row: position.row,
     column: position.column,
@@ -16,7 +16,7 @@ const changeWhiteKnightPosition = (position) => {
 };
 const changeWhiteBishopPosition = (position) => {
   return {
-    type: 'MOVE_WHITE_KNIGHT',
+    type: 'MOVE_WHITE_BISHOP',
     isOnBoard: position.isOnBoard,
     row: position.row,
     column: position.column,

@@ -7,21 +7,25 @@
   flex-direction: column;
   align-items: center;
 }
-.smallButton {
+.small-button {
   width: calc((100% - 1rem) / 2);
   /* weird width value for equal vertical and horizontal spacing */
 }
 
-.fullWidthButton {
+.full-width-button {
   width: 100%;
   margin-top: 1rem !important;
 }
 
-.delayInput {
+.delay-input {
   width: 100%;
   margin-top: 1rem !important;
 }
 
 .table-container {
   max-height: 500px;
+}
+
+.capitalize-text {
+  text-transform: capitalize;
 }

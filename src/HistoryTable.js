@@ -12,6 +12,7 @@ import {
 } from '@material-ui/core';
 import { withStyles } from '@material-ui/styles';
 import store from './store/store';
+import './App.css';
 
 const StyledTableRow = withStyles((theme) => ({
   root: {
@@ -59,7 +60,9 @@ const HistoryTable = () => {
               {moves.length > 0 ? (
                 moves.map((move) => (
                   <StyledTableRow key={move.id}>
-                    <TableCell>{move.pieceName}</TableCell>
+                    <TableCell className='capitalize-text'>
+                      {move.pieceName}
+                    </TableCell>
                     <TableCell align='center'>{move.oldPosition}</TableCell>
                     <TableCell align='center'>{move.newPosition}</TableCell>
                   </StyledTableRow>

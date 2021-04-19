@@ -28,8 +28,8 @@ const Controls = () => {
   ]);
 
   const canContinueGame = () =>
-    blacksPositions.filter((element) => element.isOnBoard) &&
-    whitesPositions.filter((element) => element.isOnBoard);
+    blacksPositions.filter((element) => element.isOnBoard).length > 0 &&
+    whitesPositions.filter((element) => element.isOnBoard).length > 0;
 
   const handleDelayChange = (e) => {
     const value = e.target.value;
@@ -39,10 +39,12 @@ const Controls = () => {
   };
 
   useInterval(() => {
-    canContinueGame().length !== 0 ? setIsStoped(false) : setIsStoped(true);
+    canContinueGame() ? setIsStoped(false) : setIsStoped(true);
     if (!isPaused && !isStoped) {
       setMovesCounter(movesCounter + 1);
-      movePieces(movesCounter, whitesPositions, blacksPositions);
+      movesCounter % 2 === 0
+        ? movePieces(movesCounter, whitesPositions, blacksPositions, 'white')
+        : movePieces(movesCounter, blacksPositions, whitesPositions, 'black');
     }
   }, delay);
 
@@ -58,7 +60,7 @@ const Controls = () => {
     <Grid container justify='center'>
       <Grid xs={6} sm={4} lg={2} item container justify='space-between'>
         <Button
-          className='smallButton'
+          className='small-button'
           color='primary'
           variant='outlined'
           onClick={pauseGame}
@@ -66,7 +68,7 @@ const Controls = () => {
           Pause
         </Button>
         <Button
-          className='smallButton'
+          className='small-button'
           color='primary'
           variant='contained'
           onClick={playGame}
@@ -74,7 +76,7 @@ const Controls = () => {
           Play
         </Button>
         <Button
-          className='fullWidthButton'
+          className='full-width-button'
           variant='outlined'
           onClick={simulateGame}
         >
@@ -86,7 +88,7 @@ const Controls = () => {
           type='number'
           value={delay}
           onChange={handleDelayChange}
-          className='delayInput'
+          className='delay-input'
         />
       </Grid>
     </Grid>
