@@ -4,7 +4,6 @@ const piecesPositionReducer = (state, action) => {
       return {
         ...state,
         movesHistory: state.movesHistory.concat({
-          id: action.id,
           pieceName: action.pieceName,
           oldPosition: action.oldPosition,
           newPosition: action.newPosition,

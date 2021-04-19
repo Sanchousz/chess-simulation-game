@@ -48,10 +48,9 @@ const isOccupied = (alreadyOccupied, position) => {
   );
 };
 
-const writeToHistory = (moveId, name, color, oldPosition, newPosition) => {
+const writeToHistory = (name, color, oldPosition, newPosition) => {
   store.dispatch(
     addToHistory(
-      moveId,
       `${color} ${name}`,
       generateCellAdress(oldPosition),
       generateCellAdress(newPosition)
@@ -144,7 +143,7 @@ const takeAPiece = (position, color) => {
   }
 };
 
-const movePieces = (id, teammatesPositions, opponentsPositions, color) => {
+const movePieces = (teammatesPositions, opponentsPositions, color) => {
   let newPosition = false,
     oldPosition,
     pieceToMove,
@@ -191,7 +190,7 @@ const movePieces = (id, teammatesPositions, opponentsPositions, color) => {
   let opponentColor = color === 'white' ? 'black' : 'white';
   if (i === 0) takeAPiece(newPosition, opponentColor);
   if (typeof oldPosition !== 'undefined')
-    writeToHistory(id, pieceToMove, color, oldPosition, newPosition);
+    writeToHistory(pieceToMove, color, oldPosition, newPosition);
 };
 
 const isAGoodMove = (newPosition, teammatesPositions, opponentsPositions) => {

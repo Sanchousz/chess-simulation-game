@@ -58,8 +58,8 @@ const HistoryTable = () => {
             </TableHead>
             <TableBody>
               {moves.length > 0 ? (
-                moves.map((move) => (
-                  <StyledTableRow key={move.id}>
+                moves.map((move, index) => (
+                  <StyledTableRow key={index}>
                     <TableCell className='capitalize-text'>
                       {move.pieceName}
                     </TableCell>

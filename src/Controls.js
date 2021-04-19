@@ -39,12 +39,19 @@ const Controls = () => {
   };
 
   useInterval(() => {
-    canContinueGame() ? setIsStoped(false) : setIsStoped(true);
+    if (!canContinueGame()) setIsStoped(true);
     if (!isPaused && !isStoped) {
-      setMovesCounter(movesCounter + 1);
-      movesCounter % 2 === 0
-        ? movePieces(movesCounter, whitesPositions, blacksPositions, 'white')
-        : movePieces(movesCounter, blacksPositions, whitesPositions, 'black');
+      if (movesCounter <= 30) {
+        setMovesCounter(movesCounter + 1);
+        movesCounter % 2 === 0
+          ? movePieces(whitesPositions, blacksPositions, 'white')
+          : movePieces(blacksPositions, whitesPositions, 'black');
+      } else {
+        alert(
+          'More than 30 moves were made, probably the program has entered an infinite loop. The game was stopped.'
+        );
+        setIsStoped(true);
+      }
     }
   }, delay);
 

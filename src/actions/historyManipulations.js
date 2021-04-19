@@ -1,7 +1,6 @@
-const addToHistory = (id, pieceName, oldPosition, newPosition) => {
+const addToHistory = (pieceName, oldPosition, newPosition) => {
   return {
     type: 'ADD_TO_HISTORY',
-    id,
     pieceName,
     oldPosition,
     newPosition,
